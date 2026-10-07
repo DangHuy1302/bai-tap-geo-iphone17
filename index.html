@@ -16,9 +16,16 @@
     <meta property="og:description" content="Phân tích sức mạnh RAM 12GB và kỷ nguyên Apple Intelligence cùng chuyên gia Bùi Đăng Huy (TLU).">
     <meta property="og:image" content="https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=1200&q=80">
 
-    <!-- Fonts & Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fonts & Icons (PERF: preconnect + preload hero + non-blocking CSS) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=1200&q=80" imagesrcset="https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=70 600w, https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=1200&q=80 1200w" imagesizes="(max-width: 768px) 100vw, 900px" fetchpriority="high">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"></noscript>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
 
     <!-- CHECKLIST 3: SCHEMA MARKUP (ENTITY & RELATIONSHIP) -->
     <script type="application/ld+json">
@@ -185,7 +192,7 @@
         .hero h1 span { color: var(--primary); }
         .hero-desc { font-size: 1.3rem; color: var(--text-muted); max-width: 800px; margin: 0 auto 50px; font-weight: 500; }
         .hero-img-wrap { max-width: 900px; margin: 0 auto; border-radius: 12px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.12); }
-        .hero-img-wrap img { width: 100%; display: block; }
+        .hero-img-wrap img { width: 100%; height: auto; display: block; }
 
         .container { display: grid; grid-template-columns: 1fr 340px; gap: 30px; padding: 0 20px 80px; }
         .container > main, .container > aside { min-width: 0; }
@@ -247,7 +254,7 @@
 
         /* Visuals */
         .img-wrap { margin: 40px 0; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.12); position: relative; }
-        .img-wrap img { width: 100%; display: block; transition: 0.5s; }
+        .img-wrap img { width: 100%; height: auto; display: block; transition: 0.5s; }
         .img-wrap:hover img { transform: scale(1.03); }
         .img-cap { padding: 18px; background: #f8f8f8; text-align: center; font-size: 1rem; font-style: italic; color: #555; border-top: 1px solid #eee; }
 
@@ -318,6 +325,17 @@
             .footer-grid { gap: 30px; }
             .f-col h4 { font-size: 1.05rem; }
             .f-bottom { margin-top: 35px; font-size: 0.82rem; line-height: 1.6; }
+
+            /* PERF: tắt hiệu ứng nặng trên mobile để giảm tải CPU/GPU */
+            nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: #fff; }
+            * { scroll-behavior: auto; }
+            .btn-action, .feat-card, .store-card, .faq-item summary, .nav-links a, .toc a, .f-links a, .p-social a, .img-wrap img, .faq-item summary::after { transition: none; }
+            .btn-action { box-shadow: none; }
+            .btn-action:hover, .feat-card:hover, .store-card:hover { transform: none; box-shadow: var(--shadow-sm); }
+            .img-wrap:hover img { transform: none; }
+            .toc a:hover, .f-links a:hover { padding-left: 0; }
+            .hero-img-wrap, .img-wrap { box-shadow: none; }
+            .feat-card, .store-card, .avatar { box-shadow: none; }
         }
 
         @media (max-width: 480px) {
@@ -367,7 +385,7 @@
             <h1>Đánh Giá <span>iPhone 17 Pro Max</span>:<br>Sự Trỗi Dậy Của Generative AI</h1>
             <p class="hero-desc">Báo cáo phân tích chuyên sâu về sức mạnh RAM 12GB, tiến trình chip 2nm và hệ sinh thái trí tuệ nhân tạo sinh đột phá nhất. Thực hiện bởi Bùi Đăng Huy - Sinh viên HTTT, Đại học Thủy Lợi (TLU).</p>
             <div class="hero-img-wrap">
-                <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=1200&q=80" alt="iPhone 17 Pro Max Flagship Reveal">
+                <img src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=1200&q=80" srcset="https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=600&q=70 600w, https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=1200&q=80 1200w" sizes="(max-width: 768px) 100vw, 900px" width="1200" height="800" fetchpriority="high" decoding="async" alt="iPhone 17 Pro Max Flagship Reveal">
             </div>
         </header>
 
@@ -405,7 +423,7 @@
                     <p>Hệ thống Apple Intelligence thế hệ mới trên iPhone 17 Pro Max cho phép người dùng tóm tắt hàng ngàn email, tạo video 4K chuyên nghiệp từ mô tả văn bản và hỗ trợ Siri hiểu ngữ cảnh cực sâu mà không cần Cloud. Trái tim của máy là chip <strong>A19 Pro</strong> sản xuất trên tiến trình <strong>2nm</strong> đầu tiên trên thế giới.</p>
 
                     <div class="img-wrap">
-                        <img src="https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=1200&q=80" alt="iPhone AI Processing System">
+                        <img src="https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=1200&q=80" srcset="https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=600&q=70 600w, https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=1200&q=80 1200w" sizes="(max-width: 768px) 100vw, 800px" width="1200" height="800" loading="lazy" decoding="async" alt="iPhone AI Processing System">
                         <div class="img-cap">Hệ thống xử lý Neural Engine 40 nhân tối ưu cho các mô hình ngôn ngữ lớn (LLM).</div>
                     </div>
 
@@ -437,7 +455,7 @@
                     <p>Apple tiếp tục sử dụng chất liệu <strong>Titanium Grade 5</strong> siêu bền chuẩn hàng không vũ trụ. Điểm đột phá năm nay nằm ở màn hình LTPO mới với tần số quét <strong>144Hz</strong> và độ sáng đỉnh 3500 nits, giúp hiển thị nội dung AI rõ nét trong mọi điều kiện ánh sáng.</p>
 
                     <div class="img-wrap">
-                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1200&q=80" alt="Hardware chip interior detail">
+                        <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1200&q=80" srcset="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=600&q=70 600w, https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=1200&q=80 1200w" sizes="(max-width: 768px) 100vw, 800px" width="1200" height="800" loading="lazy" decoding="async" alt="Hardware chip interior detail">
                         <div class="img-cap">Cấu trúc tản nhiệt buồng hơi Vapor Chamber giúp duy trì hiệu suất AI ổn định khi xử lý tác vụ nặng.</div>
                     </div>
 
@@ -574,14 +592,14 @@
                     <h3 class="widget-title">Bài viết liên quan</h3>
                     <div style="display: flex; flex-direction: column; gap: 15px;">
                         <a href="#" style="text-decoration:none; color:inherit; display:flex; gap:10px;">
-                            <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?auto=format&fit=crop&w=80&h=80&q=80" style="border-radius:8px;" alt="Watch">
+                            <img src="https://images.unsplash.com/photo-1616348436168-de43ad0db179?auto=format&fit=crop&w=80&h=80&q=80" width="80" height="80" loading="lazy" decoding="async" style="border-radius:8px;" alt="Watch">
                             <div>
                                 <h5 style="font-size:0.95rem;">Apple Watch Ultra 3 AI</h5>
                                 <span style="color:var(--primary); font-size:0.85rem; font-weight:700;">Từ 19.990.000đ</span>
                             </div>
                         </a>
                         <a href="#" style="text-decoration:none; color:inherit; display:flex; gap:10px;">
-                            <img src="https://images.unsplash.com/photo-1592890288564-76628a30a657?auto=format&fit=crop&w=80&h=80&q=80" style="border-radius:8px;" alt="iPhone 17">
+                            <img src="https://images.unsplash.com/photo-1592890288564-76628a30a657?auto=format&fit=crop&w=80&h=80&q=80" width="80" height="80" loading="lazy" decoding="async" style="border-radius:8px;" alt="iPhone 17">
                             <div>
                                 <h5 style="font-size:0.95rem;">Review iPhone 17 mới</h5>
                                 <span style="color:var(--primary); font-size:0.85rem; font-weight:700;">Từ 25.490.000đ</span>
